@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>News App</title>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <img src="1.jpg" alt="">
+    <a class="navbar-brand" id="home" href="#">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item-active">
+          <a class="nav-link" id="study" href="#">Study</a>
+        </li>
+        <li class="nav-item-active">
+          <a class="nav-link" id="cricket" href="#">Cricket</a>
+        </li>
+        <li class="nav-item-active">
+          <a class="nav-link" id="bollywood" href="#">Bollywood</a>
+        </li>
+        <li class="nav-item-active">
+          <a class="nav-link" id="hollywood" href="#">Hollywood</a>
+        </li>
+        <li class="nav-item-active">
+          <a class="nav-link" id="usa" href="#">Usa</a>
+        </li>
+        <li class="nav-item-active">
+          <a class="nav-link" id="weather" href="#">Weather</a>
+        </li>
+        <li class="nav-item-active">
+          <a class="nav-link" id="politics" href="#">Politics</a>
+        </li>
+        <li class="nav-item-active">
+          <a class="nav-link" id="india" href="#">India</a>
+        </li>
+        <li class="nav-item-active">
+          <a class="nav-link" id="ipl" href="#">IPL</a>
+        </li>
+
+
+
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search for only News"
+          aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" id="btn">Search</button>     <button class="btn btn-outline-success my-2 my-sm-0" >Feedback</button> 
+      </form>
+    </div>
+  </nav>
+  
+  <div class="conatiner row">
+<img id="gif" src="https://th.bing.com/th/id/OIP.k5os1Mhv0_g3E1udbSw15wHaEo?pid=ImgDet&rs=1" alt="">
+
+
+
+  </div>
+ 
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+
+
+
+
+<script>
+
+
+
+  const ad = "Your search  - did not match any documents Suggestions Make sure that all words are spelled correctly Try different keywords Try more general keywords Try fewer keywords.";
+  const er = "Please type NEWS in the search box.";
+  const conatiner = document.querySelector('.conatiner');
+  const search = document.getElementById('search');
+  const btn = document.getElementById('btn');
+
+  
+
+
+
+  async function fun(query) {
+    conatiner.innerHTML = "";
+
+    try {
+
+
+
+      const r = await fetch(`https://newsdata.io/api/1/news?apikey=pub_264884a818a58c5911527f9091e800a540a8a&q=${query}`);
+
+      const d = await r.json();
+      console.log(d);
+      d.results.forEach(element => {
+
+        conatiner.innerHTML += `
+
+      <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="${element.image_url}" alt="">
+  <div class="card-body">
+    <b><h5 class="card-title">${element.title}</h5><b>
+      <h4>${element.pubDate}</h4>
+      <b><h6>${element.description.substring(0, 270)}</h6></b> 
+      <a target="_blank" href="${element.link}" class="btn btn-outline-success">Read more..</a>
+
+  </div>
+</div>
+   
+  `;
+      });
+
+    } catch (error) {
+      //alert(ad);
+    }
+
+  }
+
+  btn.addEventListener('click', function (e) {
+
+
+    e.preventDefault();
+    if (!search.value) {
+      alert(er);
+    }
+    else {
+
+      fun(search.value.trim());
+
+
+      weather.style.color = "white";
+      usa.style.color = "white";
+      bollywood.style = "white";
+      cricket.style.color = "white";
+      india.style.color = "white";
+      ipl.style.color = "white";
+      study.style.color = "white";
+      home.style.color = "white";
+      hollywood.style.color = "white";
+      politics.style.color = "white";
+
+    }
+  })
+
+
+
+
+
+
+
+
+
+
+  const cricket = document.getElementById('cricket');
+  const bollywood = document.getElementById('bollywood');
+  const usa = document.getElementById('usa');
+  const weather = document.getElementById('weather');
+  const politics = document.getElementById('politics');
+  const india = document.getElementById('india');
+  const ipl = document.getElementById('ipl');
+  const study = document.getElementById('study');
+  const home = document.getElementById('home');
+  const hollywood = document.getElementById('hollywood');
+  let query;
+  
+  async function news(query) {
+    conatiner.innerHTML = "";
+
+    try {
+
+
+
+      const r = await fetch(`https://newsdata.io/api/1/news?apikey=pub_264884a818a58c5911527f9091e800a540a8a&q=${query}`);
+
+      const d = await r.json();
+      console.log(d);
+      d.results.forEach(element => {
+
+        conatiner.innerHTML += `
+  
+      <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="${element.image_url}" alt="">
+  <div class="card-body">
+    <b><h5 class="card-title">${element.title}</h5><b>
+      <h4>${element.pubDate}</h4>
+      <b><h6>${element.description.substring(0, 270)}</h6></b> 
+      <a target="_blank" href="${element.link}" class="btn btn-outline-success">Read more..</a>
+
+  </div>
+</div>
+  `;
+      });
+     
+
+    } catch (error) {
+      //alert(ad);
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  politics.addEventListener('click', function () {
+    news("politics");
+
+    politics.style.color = "lightblue";
+    politics.style.fontWeight = "800";
+
+
+    weather.style.color = "white";
+    usa.style.color = "white";
+    bollywood.style = "white";
+    cricket.style.color = "white";
+    india.style.color = "white";
+    ipl.style.color = "white";
+    study.style.color = "white";
+    home.style.color = "white";
+    hollywood.style.color = "white";
+
+  })
+  weather.addEventListener('click', function () {
+    news("weather");
+
+    weather.style.color = "lightblue";
+    weather.style.fontWeight = "800";
+
+    politics.style.color = "white";
+    usa.style.color = "white";
+    bollywood.style = "white";
+    cricket.style.color = "white";
+    india.style.color = "white";
+    ipl.style.color = "white";
+    study.style.color = "white";
+    home.style.color = "white";
+    hollywood.style.color = "white";
+
+
+  })
+  usa.addEventListener('click', function () {
+    news("america");
+    usa.style.color = "lightblue";
+    usa.style.fontWeight = "800";
+
+    politics.style.color = "white";
+    weather.style.color = "white";
+    bollywood.style = "white";
+    cricket.style.color = "white";
+    india.style.color = "white";
+    ipl.style.color = "white";
+    study.style.color = "white";
+    home.style.color = "white";
+    hollywood.style.color = "white";
+
+
+  })
+  bollywood.addEventListener('click', function () {
+
+    news("bollywood");
+
+    bollywood.style.color = "lightblue";
+    bollywood.style.fontWeight = "800";
+
+    politics.style.color = "white";
+    weather.style.color = "white";
+    usa.style = "white";
+    cricket.style.color = "white";
+    india.style.color = "white";
+    ipl.style.color = "white";
+    study.style.color = "white";
+    home.style.color = "white";
+    hollywood.style.color = "white";
+
+
+  })
+
+  cricket.addEventListener('click', function () {
+
+    news("cricket")
+
+    cricket.style.color = "lightblue";
+    cricket.style.fontWeight = "800";
+
+    politics.style.color = "white";
+    weather.style.color = "white";
+    usa.style = "white";
+    bollywood.style.color = "white";
+    india.style.color = "white";
+    ipl.style.color = "white";
+    study.style.color = "white";
+    home.style.color = "white";
+    hollywood.style.color = "white";
+
+
+
+  })
+
+  india.addEventListener('click', function () {
+    news("india")
+
+    india.style.color = "lightblue";
+    india.style.fontWeight = "800";
+
+    politics.style.color = "white";
+    weather.style.color = "white";
+    usa.style.color = "white";
+    bollywood.style.color = "white";
+    cricket.style.color = "white";
+    ipl.style.color = "white";
+    study.style.color = "white";
+    home.style.color = "white";
+    hollywood.style.color = "white";
+
+
+
+
+  })
+  ipl.addEventListener('click', function () {
+    news("ipl");
+
+    ipl.style.color = "lightblue";
+    ipl.style.fontWeight = "800";
+
+    politics.style.color = "white";
+    weather.style.color = "white";
+    usa.style = "white";
+    bollywood.style.color = "white";
+    cricket.style.color = "white";
+    india.style.color = "white";
+    study.style.color = "white";
+    home.style.color = "white";
+    hollywood.style.color = "white";
+  })
+
+  study.addEventListener('click', function () {
+    news("study");
+
+    study.style.color = "lightblue";
+    study.style.fontWeight = "800";
+
+
+    politics.style.color = "white";
+    weather.style.color = "white";
+    usa.style = "white";
+    bollywood.style.color = "white";
+    cricket.style.color = "white";
+    india.style.color = "white";
+    ipl.style.color = "white";
+    home.style.color = "white";
+    hollywood.style.color = "white";
+
+  })
+  home.addEventListener('click', function () {
+
+    home1("all");
+
+    home.style.color = "lightblue";
+    home.style.fontWeight = "800";
+
+
+    politics.style.color = "white";
+    weather.style.color = "white";
+    usa.style = "white";
+    bollywood.style.color = "white";
+    cricket.style.color = "white";
+    india.style.color = "white";
+    ipl.style.color = "white";
+    study.style.color = "white";
+    hollywood.style.color = "white";
+
+  })
+  hollywood.addEventListener('click', function () {
+    news("hollywood");
+
+    hollywood.style.color = "lightblue";
+    hollywood.style.fontWeight = "800";
+
+    politics.style.color = "white";
+    weather.style.color = "white";
+    usa.style = "white";
+    bollywood.style.color = "white";
+    cricket.style.color = "white";
+    india.style.color = "white";
+    ipl.style.color = "white";
+    study.style.color = "white";
+    home.style.color = "white";
+
+  })
+
+
+
+
+
+  // home logic here
+
+
+
+  async function home1(query) {
+    conatiner.innerHTML = "";
+
+    try {
+
+
+
+      const r = await fetch(`https://newsdata.io/api/1/news?apikey=pub_264884a818a58c5911527f9091e800a540a8a&q=${query}`);
+
+      const d = await r.json();
+      console.log(d);
+      d.results.forEach(element => {
+
+        conatiner.innerHTML += `
+  
+      <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="${element.image_url}" alt="">
+  <div class="card-body">
+    <b><h5 class="card-title">${element.title}</h5><b>
+      <h4>${element.pubDate}</h4>
+      <b><h6>${element.description.substring(0, 270)}</h6></b> 
+      <a target="_blank" href="${element.link}" class="btn btn-outline-success">Read more..</a>
+
+  </div>
+</div>
+  `;
+      });
+
+    } catch (error) {
+      //alert(ad);
+    }
+
+  }
+
+  home1("all");
+
+
+</script>
+
+</html>
